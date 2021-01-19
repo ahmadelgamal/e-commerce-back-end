@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   console.log('==========READ ALL PRODUCTS==========');
   Product
     .findAll({
-      include: [Category]
+      include: [Category, Tag]
     })
     .then(dbProductData => res.json(dbProductData))
     .catch(err => {
@@ -27,9 +27,7 @@ router.get('/:id', (req, res) => {
   Product
     .findOne({
       where: { id: req.params.id },
-      include: [
-        Category
-      ]
+      include: [Category, Tag]
     })
     .then(dbProductData => {
       if (!dbProductData) {
